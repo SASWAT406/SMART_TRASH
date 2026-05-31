@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Garbage AI</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="workbench">
+            <header class="header-row">
+                <div>
+                    <p class="eyebrow">CNN classifier</p>
+                    <h1>Smart Garbage AI</h1>
+                </div>
+                <div class="status-pill" id="modelStatus">Checking model</div>
+            </header>
+
+            <div class="workspace">
+                <form class="upload-panel" id="uploadForm">
+                    <div class="source-options" role="group" aria-label="Image source">
+                        <label class="source-button active" id="uploadButton" for="imageInput">Upload</label>
+                        <button class="source-button" type="button" id="cameraButton">Camera</button>
+                        <button class="source-button" type="button" id="pasteButton">Paste</button>
+                    </div>
+
+                    <input type="file" id="imageInput" name="image" accept="image/*">
+
+                    <div class="camera-panel" id="cameraPanel" hidden>
+                        <video id="cameraView" autoplay playsinline muted></video>
+                        <div class="camera-actions">
+                            <button class="secondary-button" type="button" id="captureButton">Capture</button>
+                            <button class="secondary-button quiet" type="button" id="stopCameraButton">Stop</button>
+                        </div>
+                    </div>
+
+                    <canvas id="cameraCanvas" hidden></canvas>
+
+                    <label class="drop-zone" id="dropZone" for="imageInput" tabindex="0">
+                        <span class="drop-title">Choose image</span>
+                        <span class="file-name" id="fileName">No file selected</span>
+                    </label>
+
+                    <div class="preview-frame">
+                        <img id="preview" alt="">
+                        <span class="empty-preview" id="emptyPreview">Image preview</span>
+                    </div>
+
+                    <button type="submit" id="predictButton" disabled>Predict</button>
+                </form>
+
+                <section class="result-panel" aria-live="polite">
+                    <div class="result-top">
+                        <span class="small-label">Prediction</span>
+                        <strong id="predictionText">Waiting</strong>
+                        <span id="confidenceText">0%</span>
+                    </div>
+
+                    <div class="probabilities" id="probabilities">
+                        <div class="prob-row" data-class="metal">
+                            <span>Metal</span>
+                            <div class="bar-track"><div class="bar-fill"></div></div>
+                            <strong>0%</strong>
+                        </div>
+                        <div class="prob-row" data-class="paper">
+                            <span>Paper</span>
+                            <div class="bar-track"><div class="bar-fill"></div></div>
+                            <strong>0%</strong>
+                        </div>
+                        <div class="prob-row" data-class="plastic">
+                            <span>Plastic</span>
+                            <div class="bar-track"><div class="bar-fill"></div></div>
+                            <strong>0%</strong>
+                        </div>
+                    </div>
+
+                    <p class="message" id="message"></p>
+                </section>
+            </div>
+
+            <section class="sort-line" aria-label="Sorting bins">
+                <article class="bin metal-bin" data-bin="metal">
+                    <span class="bin-lid"></span>
+                    <strong>Metal</strong>
+                    <span class="bin-meter"></span>
+                </article>
+                <article class="bin paper-bin" data-bin="paper">
+                    <span class="bin-lid"></span>
+                    <strong>Paper</strong>
+                    <span class="bin-meter"></span>
+                </article>
+                <article class="bin plastic-bin" data-bin="plastic">
+                    <span class="bin-lid"></span>
+                    <strong>Plastic</strong>
+                    <span class="bin-meter"></span>
+                </article>
+            </section>
+        </section>
+    </main>
+
+    <script src="/app.js"></script>
+</body>
+</html>
